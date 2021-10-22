@@ -1,2 +1,2 @@
-# near_tutorial
-Tutorial for NEAR DLT platform.
+# Rust Course
+Tutorial for Rust Programming Language, based in Rust Documentation.
