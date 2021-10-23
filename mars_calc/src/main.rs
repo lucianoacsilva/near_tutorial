@@ -1,26 +1,17 @@
 use std::io;
 
 fn main() {
+    println!("User, enter your weight in kilograms!");
     let mut input = String::new();
 
-    io::stdin().read_line(&mut input);
+    io::stdin().read_line(&mut input).unwrap();
 
-    borrow_string(&input);
-    own_string(input)
+    let weight: f32 = input.trim().parse().unwrap();
     
-    // println!("Input: {}", input);
-    // let mars_weight: f32 = calculate_mars_weight(30.0);
-    // println!("Weight on mars: {}", mars_weight);
+    let mars_weight: f32 = calculate_mars_weight(weight);
+    println!("Weight on mars: {}", mars_weight);
 }
 
 fn calculate_mars_weight(earth_weight: f32) -> f32 {
     earth_weight/ 9.81 * 3.711
-}
-
-fn borrow_string(s: &String)  {
-    println!("{}", s);
-}
-
-fn own_string(s: String)  {
-    println!("{}", s);
 }
