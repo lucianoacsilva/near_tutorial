@@ -1,9 +1,4 @@
 fn main() {
-    let get = HTTP_method::GET("abcd".to_string());
-    let post = HTTP_method::POST;
-    let put = HTTP_method::PUT;
-    let delete = HTTP_method::DELETE(100);
-
     let server = Server::new("127.0.0.1:8080".to_string());
     server.run();
 }
@@ -26,15 +21,15 @@ impl Server {
 
 struct Request {
     path: String,
-    query_string: String,
+    query_string: Option<String>,
     method: HTTP_method
 }
 
 enum HTTP_method {
-    GET(String),
+    GET,
     POST,
     PUT,
-    DELETE(u64),
+    DELETE,
     HEAD,
     CONNECT,
     OPTIONS,
