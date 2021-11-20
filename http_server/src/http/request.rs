@@ -1,7 +1,9 @@
+use std::str::Utf8Error;
 use super::method::HTTP_method;
 use std::convert::TryFrom;
 use std::error::Error;
 use std::fmt::{Debug, Display, Formatter, Result as FmtResult};
+use std::str;
 
 pub struct Request {
     path: String,
@@ -21,6 +23,8 @@ impl TryFrom<&[u8]> for Request {
     // GET /search?name=abc&sort=1 HTTP/1.1
 
     fn try_from(buffer: &[u8]) -> Result<Self, Self::Error> {
+        let request = str::from_utf8(buffer)?;
+
         unimplemented!();
     }
 }
@@ -46,6 +50,12 @@ impl ParseError{
 impl Display for ParseError {
     fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
         write!(f, "{}", self.message())
+    }
+}
+
+impl From<Utf8Error> for ParseError {
+    fn from(_: Utf8Error) -> Self {
+        Self::InvalidEncoding
     }
 }
 
